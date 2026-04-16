@@ -6,6 +6,10 @@ RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 
 TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
 
+Caixa caixa = new Caixa("Lançamentos", "Vermelho", 3);
+
+repositorioCaixa.Cadastrar(caixa);
+
 while (true)
 {
     Console.Clear();
@@ -51,7 +55,7 @@ while (true)
                 telaCaixa.Excluir();
 
             else if (opcaoMenuInterno == "4")
-                telaCaixa.VisualizarTodos();
+                telaCaixa.VisualizarTodos(deveExibirCabecalho: true);
         }
 
         else if (opcaoMenuPrincipal == "2")
