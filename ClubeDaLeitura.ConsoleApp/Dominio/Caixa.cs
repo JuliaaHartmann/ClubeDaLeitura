@@ -26,4 +26,11 @@ public class Caixa
         Cor = cor;
         DiasDeEmprestimo = diasDeEmprestimo;
     }
+
+    public void AtualizarRegistro(Caixa caixaAtualizada)
+    {
+        Etiqueta = caixaAtualizada.Etiqueta;
+        Cor = caixaAtualizada.Cor;
+        DiasDeEmprestimo = caixaAtualizada.DiasDeEmprestimo;
+    }
 }
