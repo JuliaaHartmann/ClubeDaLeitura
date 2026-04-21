@@ -36,7 +36,7 @@ while (true)
 
     if (opcaoMenuPrincipal == "S")
     {
-        //Console.Clear();
+        Console.Clear();
         break;
     }
 
