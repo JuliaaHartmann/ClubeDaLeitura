@@ -1,4 +1,4 @@
-using System;
+using System.Runtime.CompilerServices;
 using ClubeDaLeitura.ConsoleApp.Dominio;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
@@ -9,59 +9,13 @@ public class TelaRevista : TelaBase
     private RepositorioRevista repositorioRevista;
     private RepositorioCaixa repositorioCaixa;
 
-    public TelaRevista(RepositorioRevista rR, RepositorioCaixa rC) : base("Revista")
+    public TelaRevista(RepositorioRevista rR, RepositorioCaixa rC) : base("Revista", rR)
     {
         repositorioRevista = rR;
         repositorioCaixa = rC;
     }
-
-    public void Cadastrar()
-    {
-        ExibirCabecalho("Cadastro de Revista");
-
-        Revista novaRevista = ObterDadosCadastrais();
-
-        string[] erros = novaRevista.Validar();
-
-        if (erros.Length > 0)
-        {
-            Console.WriteLine("---------------------------------");
-
-            Console.ForegroundColor = ConsoleColor.Red;
-
-            for (int i = 0; i < erros.Length; i++)
-            {
-                string erro = erros[i];
-
-                Console.WriteLine(erro);
-            }
-
-            Console.ResetColor();
-            Console.WriteLine("---------------------------------");
-            Console.Write("Digite ENTER para continuar...");
-            Console.ReadLine();
-
-            // Recursão
-            Cadastrar();
-            return;
-        }
-
-        repositorioRevista.Cadastrar(novaRevista);
-
-        ExibirMensagem($"O registro \"{novaRevista.Id}\" foi cadastrado com sucesso!");
-    }
-
-    public void Editar()
-    {
-
-    }
-
-    public void Excluir()
-    {
-
-    }
-
-    public void VisualizarTodos(bool deveExibirCabecalho)
+    
+    public override void VisualizarTodos(bool deveExibirCabecalho)
     {
         if (deveExibirCabecalho)
             ExibirCabecalho("Visualização de Revistas");
@@ -109,7 +63,7 @@ public class TelaRevista : TelaBase
             Console.ReadLine();
         }
     }
-    private Revista ObterDadosCadastrais()
+    protected override EntidadeBase ObterDadosCadastrais()
     {
         Console.Write("Digite o título da revista: ");
         string? titulo = Console.ReadLine();
