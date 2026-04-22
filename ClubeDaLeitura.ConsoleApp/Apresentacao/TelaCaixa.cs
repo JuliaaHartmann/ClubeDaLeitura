@@ -1,6 +1,6 @@
-using System.Diagnostics.Contracts;
 using ClubeDaLeitura.ConsoleApp.Apresentacao.Base;
 using ClubeDaLeitura.ConsoleApp.Dominio;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 namespace ClubeDaLeitura.ConsoleApp.Apresentacao;
@@ -13,6 +13,7 @@ public class TelaCaixa : TelaBase
     {
         repositorioCaixa = rC;
     }
+
     public override void VisualizarTodos(bool deveExibirCabecalho)
     {
         if (deveExibirCabecalho)
@@ -23,7 +24,7 @@ public class TelaCaixa : TelaBase
             "Id", "Etiqueta", "Cor", "Tempo de Empréstimo"
         );
 
-        EntidadeBase?[] caixas = repositorioCaixa.SelecionarTodas();
+        EntidadeBase?[] caixas = repositorioCaixa.SelecionarTodos();
 
         for (int i = 0; i < caixas.Length; i++)
         {
@@ -55,18 +56,17 @@ public class TelaCaixa : TelaBase
         {
             Console.WriteLine("---------------------------------");
             Console.WriteLine("Digite ENTER para continuar...");
-            Console.WriteLine("---------------------------------");
             Console.ReadLine();
         }
-
     }
+
     protected override EntidadeBase ObterDadosCadastrais()
     {
         Console.Write("Informe a etiqueta da caixa: ");
-        string? etiqueta = Console.ReadLine();
+        string etiqueta = Console.ReadLine() ?? string.Empty;
 
         Console.WriteLine("---------------------------------");
-        Console.WriteLine("Selecione uma das cores válidas: ");
+        Console.WriteLine("Selecione uma das cores válidas");
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("1 - Vermelho");
         Console.ForegroundColor = ConsoleColor.Green;
@@ -78,9 +78,10 @@ public class TelaCaixa : TelaBase
         Console.WriteLine("---------------------------------");
 
         Console.Write("Informe a cor da caixa: ");
-        string? codigoCor = Console.ReadLine();
+        string codigoCor = Console.ReadLine() ?? string.Empty;
 
         string cor;
+
         if (codigoCor == "1")
             cor = "Vermelho";
         else if (codigoCor == "2")
@@ -96,5 +97,5 @@ public class TelaCaixa : TelaBase
         Caixa novaCaixa = new Caixa(etiqueta, cor, diasDeEmprestimo);
 
         return novaCaixa;
-    } 
+    }
 }

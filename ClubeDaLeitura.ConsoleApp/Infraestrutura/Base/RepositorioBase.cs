@@ -18,11 +18,6 @@ public abstract class RepositorioBase
         }
     }
 
-    public EntidadeBase?[] SelecionarTodas()
-    {
-        return registros;
-    }
-
     public bool Editar(string idSelecionado, EntidadeBase entidade)
     {
         EntidadeBase? entidadeSelecionada = SelecionarPorId(idSelecionado);
@@ -73,5 +68,10 @@ public abstract class RepositorioBase
         }
 
         return entidadeSelecionada;
+    }
+
+    public EntidadeBase?[] SelecionarTodos()
+    {
+        return registros;
     }
 }
