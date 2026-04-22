@@ -1,6 +1,7 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Apresentacao;
 using ClubeDaLeitura.ConsoleApp.Dominio;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
@@ -9,19 +10,18 @@ TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
 TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa);
 
 Caixa caixa = new Caixa("Lançamentos", "Vermelho", 3);
-
 repositorioCaixa.Cadastrar(caixa);
 
-Revista revista = new Revista ("Action Comics", 155, 1990, caixa);
+Revista revista = new Revista("Action Comics", 155, 1990, caixa);
 repositorioRevista.Cadastrar(revista);
 
-EntidadeBase entidade = caixa;
+Amigo amigo = new Amigo("Joãozinho", "Dona Cleide", "49 ABC222-4353");
 
-entidade.AtualizarRegistro(new Caixa ("Teste", "Vermelho", 5));
+amigo.Validar();
 
 while (true)
 {
-    //Console.Clear();
+    Console.Clear();
     Console.WriteLine("---------------------------------");
     Console.WriteLine("Clube da Leitura");
     Console.WriteLine("---------------------------------");
@@ -44,7 +44,7 @@ while (true)
     {
         string? opcaoMenuInterno = string.Empty;
 
-        if (opcaoMenuPrincipal == "1")
+        if (opcaoMenuPrincipal == "1") // Caixas
         {
             opcaoMenuInterno = telaCaixa.ObterOpcaoMenu();
 
@@ -67,7 +67,7 @@ while (true)
                 telaCaixa.VisualizarTodos(deveExibirCabecalho: true);
         }
 
-        else if (opcaoMenuPrincipal == "2")
+        else if (opcaoMenuPrincipal == "2") // Revistas
         {
             opcaoMenuInterno = telaRevista.ObterOpcaoMenu();
 

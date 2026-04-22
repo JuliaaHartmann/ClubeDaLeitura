@@ -1,5 +1,6 @@
 using System;
 using System.Dynamic;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 namespace ClubeDaLeitura.ConsoleApp.Dominio;
 
 public class Caixa : EntidadeBase
