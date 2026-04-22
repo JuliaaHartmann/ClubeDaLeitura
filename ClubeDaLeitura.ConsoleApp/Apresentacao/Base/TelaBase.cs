@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Concurrent;
-using ClubeDaLeitura.ConsoleApp.Dominio;
-using ClubeDaLeitura.ConsoleApp.Infraestrutura;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
+using ClubeDaLeitura.ConsoleApp.Infraestrutura.Base;
 
-namespace ClubeDaLeitura.ConsoleApp.Apresentacao;
+namespace ClubeDaLeitura.ConsoleApp.Apresentacao.Base;
 
 public abstract class TelaBase
 {
