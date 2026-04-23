@@ -1,6 +1,6 @@
-using System.Runtime.CompilerServices;
 using ClubeDaLeitura.ConsoleApp.Apresentacao.Base;
 using ClubeDaLeitura.ConsoleApp.Dominio;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
 namespace ClubeDaLeitura.ConsoleApp.Apresentacao;
@@ -15,18 +15,18 @@ public class TelaRevista : TelaBase
         repositorioRevista = rR;
         repositorioCaixa = rC;
     }
-    
+
     public override void VisualizarTodos(bool deveExibirCabecalho)
     {
         if (deveExibirCabecalho)
             ExibirCabecalho("Visualização de Revistas");
 
         Console.WriteLine(
-            "{0, -7} | {1, -25} | {2, -6} | {3, -4} | {4, -15}",
-            "Id", "Título", "Edição", "Ano", "Caixa"
+            "{0, -7} | {1, -25} | {2, -6} | {3, -4} | {4, -10} | {5, -15}",
+            "Id", "Título", "Edição", "Ano", "Status", "Caixa"
         );
 
-        EntidadeBase?[] revistas = repositorioRevista.SelecionarTodas();
+        EntidadeBase?[] revistas = repositorioRevista.SelecionarTodos();
 
         for (int i = 0; i < revistas.Length; i++)
         {
@@ -39,6 +39,13 @@ public class TelaRevista : TelaBase
             Console.Write("{0, -25} | ", r.Titulo);
             Console.Write("{0, -6} | ", r.NumeroEdicao);
             Console.Write("{0, -4} | ", r.AnoPublicacao);
+
+            string status = r.Status.ToString();
+
+            if (r.Status == StatusRevista.Disponivel)
+                status = "Disponível";
+
+            Console.Write("{0, -10} | ", status);
 
             string corSelecionada = r.Caixa.Cor;
 
@@ -64,10 +71,11 @@ public class TelaRevista : TelaBase
             Console.ReadLine();
         }
     }
+
     protected override EntidadeBase ObterDadosCadastrais()
     {
         Console.Write("Digite o título da revista: ");
-        string? titulo = Console.ReadLine();
+        string titulo = Console.ReadLine() ?? string.Empty;
 
         Console.Write("Digite o número da edição: ");
         int numeroEdicao = Convert.ToInt32(Console.ReadLine());
@@ -78,6 +86,9 @@ public class TelaRevista : TelaBase
         string idSelecionado = SelecionarCaixa();
 
         Caixa? caixaSelecionada = (Caixa?)repositorioCaixa.SelecionarPorId(idSelecionado);
+
+        if (caixaSelecionada == null)
+            throw new NullReferenceException("Não foi possível obter o registro selecionado {Caixa}.");
 
         return new Revista(titulo, numeroEdicao, anoPublicacao, caixaSelecionada);
     }
@@ -91,7 +102,7 @@ public class TelaRevista : TelaBase
           "Id", "Etiqueta", "Cor", "Tempo de Empréstimo"
       );
 
-        EntidadeBase?[] caixas = repositorioCaixa.SelecionarTodas();
+        EntidadeBase?[] caixas = repositorioCaixa.SelecionarTodos();
 
         for (int i = 0; i < caixas.Length; i++)
         {

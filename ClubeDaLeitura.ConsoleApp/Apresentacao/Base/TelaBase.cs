@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Concurrent;
 using ClubeDaLeitura.ConsoleApp.Dominio.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura.Base;
 
@@ -14,6 +12,26 @@ public abstract class TelaBase
     {
         this.nomeEntidade = nomeEntidade;
         this.repositorio = repositorio;
+    }
+
+    public string? ObterOpcaoMenu()
+    {
+        string nomeMinusculo = nomeEntidade.ToLower();
+
+        Console.Clear();
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"Gestão de {nomeEntidade}");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"1 - Cadastrar {nomeMinusculo}");
+        Console.WriteLine($"2 - Editar {nomeMinusculo}");
+        Console.WriteLine($"3 - Excluir {nomeMinusculo}");
+        Console.WriteLine($"4 - Visualizar {nomeMinusculo}s");
+        Console.WriteLine("S - Voltar para o início");
+        Console.WriteLine("---------------------------------");
+        Console.Write("> ");
+        string? opcaoMenu = Console.ReadLine()?.ToUpper();
+
+        return opcaoMenu;
     }
 
     public void Cadastrar()
@@ -38,15 +56,13 @@ public abstract class TelaBase
             }
 
             Console.ResetColor();
-            Console.WriteLine("----------------------------");
+            Console.WriteLine("---------------------------------");
             Console.Write("Digite ENTER para continuar...");
             Console.ReadLine();
 
             Cadastrar();
             return;
         }
-
-        Console.ResetColor();
 
         repositorio.Cadastrar(novaEntidade);
 
@@ -92,7 +108,7 @@ public abstract class TelaBase
             }
 
             Console.ResetColor();
-            Console.WriteLine("----------------------------");
+            Console.WriteLine("---------------------------------");
             Console.Write("Digite ENTER para continuar...");
             Console.ReadLine();
 
@@ -140,26 +156,9 @@ public abstract class TelaBase
 
         ExibirMensagem($"O registro \"{idSelecionado}\" foi excluído com sucesso.");
     }
+
     public abstract void VisualizarTodos(bool deveExibirCabecalho);
-    public string? ObterOpcaoMenu()
-    {
-        string nomeMinusculo = nomeEntidade.ToLower();
 
-        Console.Clear();
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"Gestão de {nomeEntidade}");
-        Console.WriteLine("---------------------------------");
-        Console.WriteLine($"1 - Cadastrar {nomeMinusculo}");
-        Console.WriteLine($"2 - Editar {nomeMinusculo}");
-        Console.WriteLine($"3 - Excluir {nomeMinusculo}");
-        Console.WriteLine($"4 - Visualizar {nomeMinusculo}s");
-        Console.WriteLine("S - Voltar para o início");
-        Console.WriteLine("---------------------------------");
-        Console.Write("> ");
-        string? opcaoMenu = Console.ReadLine()?.ToUpper();
-
-        return opcaoMenu;
-    }
     protected void ExibirCabecalho(string titulo)
     {
         Console.Clear();

@@ -1,4 +1,5 @@
-namespace ClubeDaLeitura.ConsoleApp.Dominio.Base;
+using ClubeDaLeitura.ConsoleApp.Dominio.Base;
+namespace ClubeDaLeitura.ConsoleApp.Dominio;
 
 public class Revista : EntidadeBase
 {
@@ -6,11 +7,12 @@ public class Revista : EntidadeBase
     public int NumeroEdicao { get; set; }
     public int AnoPublicacao { get; set; }
     public Caixa Caixa { get; set; }
+    public StatusRevista Status { get; set; }
 
-    public Revista(string titulo, int numeroedicao, int anoPublicacao, Caixa caixa)
+    public Revista(string titulo, int numeroEdicao, int anoPublicacao, Caixa caixa)
     {
         Titulo = titulo;
-        NumeroEdicao = numeroedicao;
+        NumeroEdicao = numeroEdicao;
         AnoPublicacao = anoPublicacao;
         Caixa = caixa;
     }
@@ -23,7 +25,7 @@ public class Revista : EntidadeBase
             erros += "O campo \"Título\" é obrigatório;";
 
         else if (Titulo.Length < 2 || Titulo.Length > 100)
-            erros += "O campo \"Título\" deve conter enter 2 e 100 caracteres;";
+            erros += "O campo \"Título\" deve conter entre 2 e 100 caracteres;";
 
         if (NumeroEdicao < 0)
             erros += "O campo \"Numero da Edição\" deve conter um valor igual ou maior que 0;";
@@ -38,6 +40,7 @@ public class Revista : EntidadeBase
 
         return erros.Split(';', StringSplitOptions.RemoveEmptyEntries);
     }
+
     public override void AtualizarRegistro(EntidadeBase entidadeAtualizada)
     {
         Revista revistaAtualizada = (Revista)entidadeAtualizada;
@@ -46,5 +49,15 @@ public class Revista : EntidadeBase
         NumeroEdicao = revistaAtualizada.NumeroEdicao;
         AnoPublicacao = revistaAtualizada.AnoPublicacao;
         Caixa = revistaAtualizada.Caixa;
+    }
+
+    public void Emprestar()
+    {
+        Status = StatusRevista.Emprestada;
+    }
+
+    public void Devolver()
+    {
+        Status = StatusRevista.Disponivel;
     }
 }

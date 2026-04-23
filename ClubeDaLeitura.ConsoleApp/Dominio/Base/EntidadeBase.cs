@@ -9,9 +9,9 @@ public abstract class EntidadeBase
     public EntidadeBase()
     {
         Id = Convert
-            .ToHexString(RandomNumberGenerator.GetBytes(20))
-            .ToLower()
-            .Substring(0, 7);
+                .ToHexString(RandomNumberGenerator.GetBytes(20))
+                .ToLower()
+                .Substring(0, 7);
     }
 
     public abstract string[] Validar();
