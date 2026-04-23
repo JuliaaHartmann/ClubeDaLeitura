@@ -20,6 +20,8 @@ repositorioRevista.Cadastrar(revista);
 Amigo amigo = new Amigo("Joãozinho", "Dona Cleide", "49 ABC222-4353");
 repositorioAmigo.Cadastrar(amigo);
 
+Emprestimo emprestimo = new Emprestimo(revista, amigo);
+
 while (true)
 {
     Console.Clear();
