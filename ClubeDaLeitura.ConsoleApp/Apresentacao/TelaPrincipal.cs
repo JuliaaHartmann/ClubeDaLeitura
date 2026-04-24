@@ -38,7 +38,7 @@ public class TelaPrincipal
         repositorioEmprestimo.Cadastrar(emprestimo);
     }
 
-    public TelaBase? ApresentarMenuOpcoesPrincipal()
+    public ITela? ApresentarMenuOpcoesPrincipal()
     {
         Console.Clear();
         Console.WriteLine("---------------------------------");
