@@ -62,6 +62,9 @@ public class TelaPrincipal
         if (opcaoMenuPrincipal == "3")
             return new TelaAmigo(repositorioAmigo);
 
+        if (opcaoMenuPrincipal == "4")
+            return new TelaEmprestimo(repositorioEmprestimo, repositorioRevista, repositorioAmigo);
+
         return null;
     }
 }

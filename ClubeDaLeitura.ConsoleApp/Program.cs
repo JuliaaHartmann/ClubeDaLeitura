@@ -2,6 +2,7 @@
 using ClubeDaLeitura.ConsoleApp.Apresentacao.Base;
 using ClubeDaLeitura.ConsoleApp.Infraestrutura;
 
+// 1. Instanciação de dependências
 RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 RepositorioRevista repositorioRevista = new RepositorioRevista();
 RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
@@ -52,7 +53,6 @@ while (true)
 
         else if (telaSelecionada is TelaEmprestimo telaEmprestimo)
         {
-            opcaoMenuInterno = telaEmprestimo.ObterOpcaoMenu();
 
             if (opcaoMenuInterno == "S")
             {

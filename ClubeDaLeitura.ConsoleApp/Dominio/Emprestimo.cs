@@ -1,5 +1,7 @@
 using System.Security.Cryptography;
+
 namespace ClubeDaLeitura.ConsoleApp.Dominio;
+
 public class Emprestimo
 {
     public string Id { get; set; } = string.Empty;
